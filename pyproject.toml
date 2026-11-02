@@ -1,0 +1,29 @@
+[project]
+name = "branch-memory"
+version = "0.1.0"
+description = "Tests whether keeping rejected plot choices alive with a decaying weight makes LLM fiction less predictable."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Stay below 2.0: SDK 2.x sends API version 2026-10-21, which rejects `temperature`
+    # on every model. 1.x sends 2023-06-01, where older models still accept it via extra_body.
+    "anthropic>=1.17,<2",
+    "click>=8.1",
+    "pydantic>=2.6",
+]
+
+[project.scripts]
+branch-memory = "branch_memory.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["branch_memory", "metrics"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
