@@ -10,6 +10,10 @@ Three conditions use the same prompts and model:
 | B, decay | Proposes `k` moves and picks one at random. The rest enter a buffer with weight `exp(-age / tau)`, dropped below 0.05. |
 | C, fixed | Same as B, but weights stay 1.0. The buffer is capped at `(k-1) * ceil(tau * ln 20)`, dropping the oldest moves first. |
 
+## Results
+
+[Full run at tau 3, 2026-11-02](results/2026-11-02-tau3/README.md): B and C scored as less predictable than A, with possible coherence loss. The run cannot separate the buffer from random move selection, or test decay itself. Each run has its own folder in `results/`.
+
 ## How to run
 
 ```powershell
